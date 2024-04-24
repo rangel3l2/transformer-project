@@ -1,0 +1,15 @@
+services:
+
+  mysqldb:
+    image: mysql:8.0.36-debian
+    container_name: mysql_transformer
+    restart: always  # or "on-failure"
+
+    environment:      
+      MYSQL_DATABASE: transformerDB    
+      MYSQL_ROOT_PASSWORD: root
+
+    ports:
+      - '3310:3306'
+    volumes:
+      - ./mysql_data:/var/lib/mysql
