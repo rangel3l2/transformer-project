@@ -1,6 +1,8 @@
+from infrasctructure.database.models import ChemicalAnalized
 
-class ChemicalsAnalized:
-     def __init__(self, hydrogen, oxygen, nitrogen, carbon_monoxide, methane, carbon_dioxide, ethylene, ethane, acetylene, co2_co_ratio, total_combustible_gases, total_gases):
+class ChemicalsAnalized(ChemicalAnalized):
+     def __init__(self, hydrogen, oxygen, nitrogen, carbon_monoxide, methane, carbon_dioxide, ethylene, ethane, acetylene, co2_co_ratio, total_combustible_gases, total_gases, id_chemical_analized=None):
+        self.id_chemical_analized = id_chemical_analized
         self.hydrogen = hydrogen
         self.oxygen = oxygen
         self.nitrogen = nitrogen

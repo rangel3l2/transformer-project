@@ -4,7 +4,7 @@ from infrasctructure.adapters.Base import Base
 import pymysql
 from sqlalchemy.ext.declarative import DeclarativeMeta
 from sqlalchemy import exc, text
-from infrasctructure.database.models import Analisys, Parameter, Equipment
+from infrasctructure.database.models import Analisys, Parameter, Equipment, ChemicalAnalized
 import json
 from datetime import datetime, timezone, date
 class AnalisysRepository:
@@ -101,20 +101,18 @@ class AnalisysRepository:
             analisys = session.query(
                     Analisys,
                     Parameter,
-                    Equipment
-                ).join(
-                Parameter, Analisys.id_parameter == Parameter.id_parameter
-                ).join(
-                Equipment, Analisys.serie_id == Equipment.serie_id
-                ).all()
+                    Equipment,
+                    ChemicalAnalized
+            ).join(Parameter, Analisys.id_parameter == Parameter.id_parameter).join(Equipment, Parameter.id_parameter == Equipment.serie_id).join(ChemicalAnalized, Analisys.id_chemical_analized == ChemicalAnalized.id_chemical_analized).all()
             session.close()
             result_list = []
             result_dict = []
-            for analise, parametro, equipamento in analisys:
+            for analise, parametro, equipamento, chemical in analisys:
               result_dict.append( {
                     'analysis': self.to_dict(analise),
                     'parameter': self.to_dict(parametro),
-                    'equipment': self.to_dict(equipamento)
+                    'equipment': self.to_dict(equipamento),
+                    'chemical': self.to_dict(chemical)
               } )
               result_list.append(result_dict)    
             return result_dict
