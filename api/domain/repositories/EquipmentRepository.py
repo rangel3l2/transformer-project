@@ -1,6 +1,7 @@
 import gspread as gc
 from infrasctructure.database.models import Equipment
 from infrasctructure.adapters.Base import Base
+
 class EquipmentRepository:
     def __init__(self, connected_sheets=None, sheet_name=None, database_adapter =None):
         self.connected_sheets = connected_sheets
@@ -16,7 +17,9 @@ class EquipmentRepository:
             Base.metadata.tables['Equipamento'].create(self.database_adapter.engine, checkfirst=True)
 
             for item in equipment:
+                
                 existing_entry = session.query(Equipment).filter_by(serie_id=item['serieid']).first()
+                
                 if not existing_entry:
                     equipment = Equipment(serie_id=item['serieid'], owner=item['proprietario'], tag=item['tag'], place_installed=item['localInstalação'], manufacturer=item['fabricante'], year_of_manufacture=item['anoFabricação'], tension_primary=item['tensaoPrimaria'], tension_secondary=item['tensaoSecundaria'], max_power=item['maxPotencia'], volume_of_oil=item['volumeOleo'], sampling_address=item['enderecoAmostragem'])
                     session.add(equipment)
@@ -25,6 +28,29 @@ class EquipmentRepository:
             return True
         except Exception as e:
             raise e
+        
+    def update_equipment(self, equipment):
+        try:
+            session = self.database_adapter.get_session()
+            for item in equipment:
+                existing_entry = session.query(Equipment).filter_by(serie_id=item['serieid']).first()
+                
+                if existing_entry:
+                    # Atualizar apenas os campos que são diferentes
+                    updated_fields = {key: value for key, value in item.items() if getattr(existing_entry, key, None) != value}
+                    if updated_fields:
+                        for key, value in updated_fields.items():
+                            setattr(existing_entry, key, value)
+                        session.commit()
+
+            session.close()
+            return True
+        except Exception as e:
+            session.rollback()
+            raise e
+
+
+        
     def get_equipment(self):
         try:
             session = self.database_adapter.get_session()

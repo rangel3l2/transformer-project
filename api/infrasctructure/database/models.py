@@ -13,7 +13,7 @@ class Analisys(Base):
     status = Column(String(45), nullable=False)
     serie_id = Column(Integer, ForeignKey('Equipamento.serieid'), name='serieid')
     id_parameter = Column(Integer, ForeignKey('Parametro.id_parametro'), name='id_parametro')    
-    
+    id_chemical_analized = Column(Integer, ForeignKey('QuimicosAnalisados.id_chemical_analized'), name='id_quimicos_analisados')
 class Parameter(Base):
     __tablename__ = 'Parametro'
     id_parameter = Column(Integer, primary_key=True, unique=True, nullable=False,
@@ -52,3 +52,19 @@ class Equipment(Base):
     max_power = Column(Float, nullable=False, name='maxPotencia')
     volume_of_oil = Column(Float, nullable=False, name='volumeoleo')
     sampling_address = Column(String(45), name='enderecoamostragem')
+    
+class ChemicalAnalized(Base):
+    __tablename__ = 'QuimicosAnalisados'
+    id_chemical_analized = Column(Integer, primary_key=True, unique=True, nullable=False, name='id_quimicos_analisados')
+    hidrogen = Column(Integer, nullable=False, name='hidrogenio')
+    oxygen = Column(Integer, nullable=False, name='oxigenio')
+    nitrogen = Column(Integer, nullable=False, name='nitrogenio')
+    carbon_monoxide = Column(Integer, nullable=False, name='monoxidocarbono')
+    methane = Column(Integer, nullable=False, name='metano')
+    carbon_dioxide = Column(Integer, nullable=False, name='dioxidoCarbono')
+    ethylene = Column(Integer, nullable=False, name='etileno')
+    ethane = Column(Integer, nullable=False, name='etano')
+    acetylene = Column(Integer, nullable=False, name='acetileno')
+    co2_co_ratio = Column(Integer, nullable=False, name='razaoCo2Co')
+    total_combustible_gases = Column(Integer, nullable=False, name='totalGasesCombustiveis')
+    total_gases = Column(Integer, nullable=False, name='totalGases')

@@ -31,7 +31,14 @@ def get_analisys_data_database():
     database_adapter = DatabaseAdapter(database_uri)
     analisys_repository = AnalisysRepository(database_adapter=database_adapter)
     return analisys_repository.get_analisys()
-        
+
+def get_analisys_from_equipmentAndParameter_database():
+    
+    from main import app        
+    database_uri = app.config['SQLALCHEMY_DATABASE_URI']
+    database_adapter = DatabaseAdapter(database_uri)
+    analisys_repository = AnalisysRepository(database_adapter=database_adapter)
+    return analisys_repository.get_analisys_by_equipment_parameter()
 
 def get_parameter_data_googlesheet():
     from main import app
@@ -50,9 +57,12 @@ def get_parameter_data_database():
 def migration_from_google_sheet_to_database():
    
     try:
-        insert_equipament_data(get_equipament_data_googlesheet())    
-        insert_parameter_data(get_parameter_data_googlesheet())
-        insert_analisys_data(get_analisys_data_googlesheet())
+        #insert_equipament_data(get_equipament_data_googlesheet())    
+        #insert_parameter_data(get_parameter_data_googlesheet())
+        #insert_analisys_data(get_analisys_data_googlesheet())
+        update_analisys_data(get_analisys_data_googlesheet())
+        update_parameter_data(get_parameter_data_googlesheet())
+        update_equipment_data(get_equipament_data_googlesheet())
         return True
     except Exception as e:
         raise e
@@ -80,3 +90,24 @@ def insert_analisys_data(data):
     status=AnalisysRepository(database_adapter=database_adapter).insert_analisys(data)
     return status
 
+def update_equipment_data(data):
+    from main import app    
+    database_uri = app.config['SQLALCHEMY_DATABASE_URI']
+    database_adapter = DatabaseAdapter(database_uri)
+    status=EquipmentRepository(database_adapter=database_adapter).update_equipment(data)
+    return status
+
+def update_parameter_data(data):
+    from main import app    
+    database_uri = app.config['SQLALCHEMY_DATABASE_URI']
+    database_adapter = DatabaseAdapter(database_uri)
+    status=ParameterRepository(database_adapter=database_adapter).update_parameter(data)
+    return status
+
+def update_analisys_data(data):
+    from main import app    
+    database_uri = app.config['SQLALCHEMY_DATABASE_URI']
+    database_adapter = DatabaseAdapter(database_uri)
+    status=AnalisysRepository(database_adapter=database_adapter).update_analisys(data)
+    return status
+    
