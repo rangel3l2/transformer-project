@@ -72,10 +72,15 @@ def get_chemicals_analized_data_database():
 def migration_from_google_sheet_to_database():
    
     try:
-        insert_equipament_data(get_equipament_data_googlesheet())    
-        insert_parameter_data(get_parameter_data_googlesheet())
-        insert_chemicals_analized_data(get_chemicals_analized_data_googlesheet())
-        insert_analisys_data(get_analisys_data_googlesheet())
+        #insert_equipament_data(get_equipament_data_googlesheet())    
+        #insert_parameter_data(get_parameter_data_googlesheet())
+        #insert_chemicals_analized_data(get_chemicals_analized_data_googlesheet())
+        #insert_analisys_data(get_analisys_data_googlesheet())
+        update_equipment_data(get_equipament_data_googlesheet())
+        update_parameter_data(get_parameter_data_googlesheet()) 
+        update_chemicals_analized_data(get_chemicals_analized_data_googlesheet())
+        update_analisys_data(get_analisys_data_googlesheet())
+        
         
    
         return True

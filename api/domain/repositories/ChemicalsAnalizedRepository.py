@@ -17,6 +17,11 @@ class ChemicalsAnalizedRepository:
             session = self.database_adapter.get_session()
             chemicals_analized = session.query(ChemicalAnalized).all()
             session.close()
+            for item in chemicals_analized:
+                if item:
+                    item = item.__dict__
+                    item.pop('_sa_instance_state')
+            chemicals_analized = [item.__dict__ for item in chemicals_analized]
             if not chemicals_analized:
                 return None
             return chemicals_analized
@@ -44,24 +49,48 @@ class ChemicalsAnalizedRepository:
         try:
             session = self.database_adapter.get_session()
             for item in chemicals_analized:
-                existing_entry = session.query(ChemicalAnalized).filter_by(id_chemicals_analized=item['idQuimicoAnalise']).first()
-                
-                if existing_entry:
+                existing_entry = session.query(ChemicalAnalized).filter_by(id_chemical_analized=item['id_quimicos_analisados']).first()
+                if existing_entry is not None:
                     updated = False
-                    if existing_entry.id_analisys != item['idAnalise']:
-                        existing_entry.id_analisys = item['idAnalise']
+                    if existing_entry.hidrogen != item['hidrogenio']:
+                        existing_entry.hidrogen = item['hidrogenio']
                         updated = True
-                    if existing_entry.id_chemical != item['idQuimico']:
-                        existing_entry.id_chemical = item['idQuimico']
+                    if existing_entry.oxygen != item['oxigenio']:
+                        existing_entry.oxygen = item['oxigenio']
                         updated = True
-                    if existing_entry.value != item['valor']:
-                        existing_entry.value = item['valor']
+                    if existing_entry.nitrogen != item['nitrogenio']:
+                        existing_entry.nitrogen = item['nitrogenio']
                         updated = True
-                    if existing_entry.unit != item['unidade']:
-                        existing_entry.unit = item['unidade']
+                    if existing_entry.carbon_monoxide != item['monoxido_carbono']:
+                        existing_entry.carbon_monoxide = item['monoxido_carbono']
+                        updated = True
+                    if existing_entry.methane != item['metano']:
+                        existing_entry.methane = item['metano']
+                        updated = True
+                    if existing_entry.carbon_dioxide != item['dioxido_carbono']:
+                        existing_entry.carbon_dioxide = item['dioxido_carbono']
+                        updated = True
+                    if existing_entry.ethylene != item['etileno']:
+                        existing_entry.ethylene = item['etileno']
+                        updated = True
+                    if existing_entry.ethane != item['etano']:
+                        existing_entry.ethane = item['etano']
+                        updated = True
+                    if existing_entry.acetylene != item['acetileno']:
+                        existing_entry.acetylene = item['acetileno']
+                        updated = True
+                    if existing_entry.co2_co_ratio != item['razao_co2_co']:
+                        existing_entry.co2_co_ratio = item['razao_co2_co']
+                        updated = True
+                    if existing_entry.total_combustible_gases != item['total_gases_combustiveis']:
+                        existing_entry.total_combustible_gases = item['total_gases_combustiveis']
+                        updated = True
+                    if existing_entry.total_gases != item['total_gases']:
+                        existing_entry.total_gases = item['total_gases']
                         updated = True
                     if updated:
                         session.commit()
+               
             session.close()
             return True
         except Exception as e:

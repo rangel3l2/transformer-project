@@ -13,7 +13,8 @@ class Analisys(Base):
     status = Column(String(45), nullable=False)
     serie_id = Column(Integer, ForeignKey('Equipamento.serieid'), name='serieid')
     id_parameter = Column(Integer, ForeignKey('Parametro.id_parametro'), name='id_parametro')    
-    id_chemical_analized = Column(Integer, ForeignKey('QuimicosAnalisados.id_chemical_analized'), name='id_quimicos_analisados')
+    id_chemical_analized = Column(Integer, ForeignKey('QuimicosAnalisados.id_quimicos_analisados'), name='id_quimicos_analisados')
+    
 class Parameter(Base):
     __tablename__ = 'Parametro'
     id_parameter = Column(Integer, primary_key=True, unique=True, nullable=False,

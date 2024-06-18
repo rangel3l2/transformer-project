@@ -26,7 +26,7 @@ class AnalisysRepository:
                 existing_entry = session.query(Analisys).filter_by(id_analisys=item['idAnalise']).first()
                 if not existing_entry:
                     
-                    analisys = Analisys(id_analisys=item['idAnalise'], enter_date=self.get_formatted_date(), sampling_date=item['dataAnalise'], status=item['status'], serie_id=item['serieid'], id_parameter=item['idParametro'])
+                    analisys = Analisys(id_analisys=item['idAnalise'], enter_date=self.get_formatted_date(), sampling_date=item['dataAnalise'], status=item['status'], serie_id=item['serieid'], id_parameter=item['idParametro'], id_chemical_analized=item['id_quimicos_analisados'])
                     session.add(analisys)
                     
                 try:
@@ -67,6 +67,10 @@ class AnalisysRepository:
                         existing_entry.id_parameter = item['idParametro']
                         updated = True
                     
+                    if existing_entry.id_chemical_analized != item['id_quimicos_analisados']:
+                        existing_entry.id_chemical_analized = item['id_quimicos_analisados']
+                        updated = True
+                    
                     if updated:
                         session.commit()
 
@@ -103,10 +107,13 @@ class AnalisysRepository:
                     Parameter,
                     Equipment,
                     ChemicalAnalized
-            ).join(Parameter, Analisys.id_parameter == Parameter.id_parameter).join(Equipment, Parameter.id_parameter == Equipment.serie_id).join(ChemicalAnalized, Analisys.id_chemical_analized == ChemicalAnalized.id_chemical_analized).all()
+            ).join(Parameter, Analisys.id_parameter == Parameter.id_parameter) \
+            .join(Equipment, Parameter.id_parameter == Equipment.serie_id) \
+            .join(ChemicalAnalized, Analisys.id_chemical_analized == ChemicalAnalized.id_chemical_analized).all()
             session.close()
             result_list = []
             result_dict = []
+            print(analisys)
             for analise, parametro, equipamento, chemical in analisys:
               result_dict.append( {
                     'analysis': self.to_dict(analise),
