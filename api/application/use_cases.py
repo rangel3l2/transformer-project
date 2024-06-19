@@ -86,8 +86,36 @@ def migration_from_google_sheet_to_database():
         return True
     except Exception as e:
         raise e
+def importDataFromGooglesheet():
+
+    try:
+        insert_equipament_data(get_equipament_data_googlesheet())    
+        insert_parameter_data(get_parameter_data_googlesheet())
+        insert_chemicals_analized_data(get_chemicals_analized_data_googlesheet())
+        insert_analisys_data(get_analisys_data_googlesheet())
+ 
     
     
+
+        return True
+    except Exception as e:
+        raise e
+    
+def updateDataFromGoogleSheet():
+
+    try:
+        update_equipment_data(get_equipament_data_googlesheet())
+        update_parameter_data(get_parameter_data_googlesheet()) 
+        update_chemicals_analized_data(get_chemicals_analized_data_googlesheet())
+        update_analisys_data(get_analisys_data_googlesheet())
+        
+    
+    
+
+        return True
+    except Exception as e:
+        raise e
+        
 def insert_equipament_data(data):
     from main import app    
     database_uri = app.config['SQLALCHEMY_DATABASE_URI']

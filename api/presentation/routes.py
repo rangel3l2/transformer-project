@@ -1,5 +1,7 @@
 from flask import Blueprint, jsonify, request
-from application.use_cases import get_equipament_data_googlesheet, get_parameter_data_googlesheet, get_analisys_data_googlesheet, get_equipment_data_database, get_analisys_data_database, get_parameter_data_database, get_analisys_from_equipmentAndParameter_database, get_chemicals_analized_data_database
+from application.use_cases import get_equipament_data_googlesheet, get_parameter_data_googlesheet, get_analisys_data_googlesheet, get_equipment_data_database, get_analisys_data_database, get_parameter_data_database, updateDataFromGoogleSheet, importDataFromGooglesheet, get_analisys_from_equipmentAndParameter_database, get_chemicals_analized_data_database
+
+
 from application.durval_triangle_use_cases import generate_durval_triangle
 from domain.entities import Analisys, Parameter, Equipment
 api_blueprint = Blueprint('api_blueprint', __name__, url_prefix='/api')
@@ -51,3 +53,13 @@ def get_durval_triangle():
 def get_chemicals_analized():
     
     return jsonify(get_chemicals_analized_data_database())
+
+@api_blueprint.route('/import', methods=['POST'])
+def importData():
+    status = importDataFromGooglesheet()
+    return jsonify({'status': status})
+
+@api_blueprint.route('/update', methods=['POST'])
+def updateData():
+    status = updateDataFromGoogleSheet()
+    return jsonify({'status': status})
