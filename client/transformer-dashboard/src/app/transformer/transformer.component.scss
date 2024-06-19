@@ -1,0 +1,30 @@
+
+.container-grid{
+    display: grid;
+    grid-template-rows: repeat(7, 1fr);
+    grid-template-columns: 1fr;
+    gap: 10px;  
+   
+
+}
+.header{
+    grid-row: 1;
+  
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    border-bottom: 1px solid rgba(48, 48, 48, 0.2);
+    padding-left: 1.5rem;
+    
+  
+}
+
+.title{
+    display: flex; 
+    gap: 0.5rem;
+   
+}
+.icon{
+  
+    color: var(--primary-color);
+}

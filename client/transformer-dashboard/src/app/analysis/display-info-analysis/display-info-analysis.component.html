@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="carousel-triangle-durval">
+    <button class="btn-move" (click)="previousItem()">
+      <span class="icon material-symbols-outlined"> arrow_back </span>
+    </button>
+
+    <div class="inner-container">
+      <div class="header">
+        @if (analysisData) {
+        <div class="item">
+          <span>Série {{ analysisData[currentIndex].equipment.tag }} </span>
+          <span>
+            Mês de {{ analysisData[currentIndex].analysis.sampling_date }}
+          </span>
+        </div>
+        <div class="item">
+          <span> Status: </span>
+          <span> {{ analysisData[currentIndex].analysis.status }} </span>
+        </div>
+        }
+      </div>
+      <div class="durval-triangle">
+        <canvas #canvas></canvas>
+      </div>
+    </div>
+
+    <button class="btn-move" (click)="nextItem()">
+      <span class="icon material-symbols-outlined"> arrow_forward </span>
+    </button>
+  </div>
+</div>

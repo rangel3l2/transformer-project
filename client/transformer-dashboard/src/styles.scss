@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+app-root{
+    
+    --background: #EDE9E9;
+    --light-white: #fdf9f9;
+    --light-black: rgba(48, 48, 48, 0.1);
+    --primary-color: #1740d1;
+    --secondary: #3657cb;
+    display: block;
+    min-height: 100vh;
+    width: 100vw;
+    
+    font-family: 'Poppins', sans-serif;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

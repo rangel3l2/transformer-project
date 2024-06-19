@@ -1,0 +1,26 @@
+
+  <table cdk-table [dataSource]="this.transformerData">
+    <!-- Position Column -->
+       <!-- Serie_id Column -->
+       <ng-container cdkColumnDef="serie_id">
+        <th cdk-header-cell *cdkHeaderCellDef>Série</th>
+        <td cdk-cell *cdkCellDef="let element">{{ element.serie_id }}</td>
+      </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container cdkColumnDef="tag">
+      <th cdk-header-cell *cdkHeaderCellDef>Nome</th>
+      <td cdk-cell *cdkCellDef="let element">{{ element.tag }}</td>
+    </ng-container>
+
+ 
+    <!-- place_Installed Column -->
+    <ng-container cdkColumnDef="place_installed">
+      <th cdk-header-cell *cdkHeaderCellDef>Local</th>
+      <td cdk-cell *cdkCellDef="let element">{{ element.place_installed }}</td>
+    </ng-container>
+
+    <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+    <tr cdk-row *cdkRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+

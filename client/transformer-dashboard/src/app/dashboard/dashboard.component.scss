@@ -1,0 +1,72 @@
+
+.container-grid{
+    display: grid;
+    grid-template-rows: repeat(7, 1fr);
+    grid-template-columns: 1fr;
+    gap: 10px;  
+   
+
+}
+.header{
+    grid-row: 1/2;
+    grid-column: 1;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    border-bottom: 1px solid rgba(48, 48, 48, 0.2);
+    padding-left: 1.5rem;
+    justify-content: space-between;
+    padding-right: 1.5rem;
+  
+}
+.notifications{
+    position: relative;
+    display: inline-block;
+}
+.notifications .badge {
+    position: absolute;
+    top: 0px;
+    right: -8px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 1.5px;
+    font-size: 12px;
+}
+.notifications::before {
+    content: " 5 Notificações enviadas";
+    position: absolute;
+    bottom: -60px; /* Posição para o texto aparecer abaixo */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    opacity: 0; /* Inicialmente invisível */
+    transition: opacity 0.3s ease;
+}
+
+.notifications:hover::before {
+    opacity: 1; /* Torna o texto visível ao passar o mouse */
+}
+
+.title{
+    display: flex; 
+    gap: 0.5rem;
+   
+}
+.icon{
+  
+    color: var(--primary-color);
+}
+.section-two{
+    grid-row: 5/25;   
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
+   
+}

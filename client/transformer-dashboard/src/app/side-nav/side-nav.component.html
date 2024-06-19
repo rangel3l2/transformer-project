@@ -1,0 +1,22 @@
+<!-- Side Nav -->
+<ul class="title">
+  <li>
+    <span>TRANSHEALTH</span>
+  </li>
+</ul>
+<ul class="finder">
+  <li>
+    <input type="text" placeholder="Digite o código" />
+    <span class="icon material-symbols-outlined"> search </span>
+  </li>
+</ul>
+
+<ul>
+    @for (item of items; track items){
+    
+  <li [routerLink]="item.link" routerLinkActive="active">
+    <span class="icon material-symbols-outlined"> {{item.icon}} </span>
+    <span class="data">{{item.title}}</span>
+  </li>
+    }
+</ul>

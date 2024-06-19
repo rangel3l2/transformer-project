@@ -1,0 +1,30 @@
+:host{
+  grid-row: span 120    
+}
+.container{
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  background-color: aqua;
+  height: 60%;
+  width: 100%;
+  overflow-wrap: normal;
+
+  
+  
+}
+table {
+    width: 90%;
+    padding: 20px;
+   
+   
+   
+  }
+  
+  th, td {
+    text-align: left;
+    border-bottom: var(--light-black) solid 1px;
+    background-color: var(--light-black);
+    padding: 1rem;
+  }
+
