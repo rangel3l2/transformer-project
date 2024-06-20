@@ -4,3 +4,4 @@ mysql_data/
 #.env/
 credential.json/
 credentials.old.json/
+api/credentials.json
