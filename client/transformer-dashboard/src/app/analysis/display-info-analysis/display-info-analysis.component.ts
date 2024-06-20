@@ -8,26 +8,26 @@ import { DatePipe } from '@angular/common';
   imports: [],
   templateUrl: './display-info-analysis.component.html',
   styleUrls: ['./display-info-analysis.component.scss'],
-  providers: [DatePipe],
+  
 })
 export class DisplayInfoAnalysisComponent implements OnInit {
   @ViewChild('canvas', { static: true }) canvasRef!: ElementRef<HTMLCanvasElement>;
   @Input() analysisData?: AnalysisData[];
   currentIndex: number = 0;
-  constructor(private datePipe: DatePipe) {}
+  constructor() {}
    ngOnInit(): void {
-    this.fixDate();
+   
     this.drawTriangle();
   }
   nextItem() {
     if (this.analysisData) {
       this.currentIndex = (this.currentIndex + 1) % this.analysisData.length;
-      this.fixDate();
+  
     }
   }
 
   previousItem() {
-    this.fixDate()
+   
     if (this.analysisData) {
       this.currentIndex = (this.currentIndex - 1 + this.analysisData.length) % this.analysisData.length; // Handle negative index
     }
@@ -35,12 +35,7 @@ export class DisplayInfoAnalysisComponent implements OnInit {
 
  
 
-  fixDate() {
-    if (this.analysisData) {
-      const dataFixed = this.datePipe.transform(this.analysisData[this.currentIndex].analysis.sampling_date, 'dd MMMM yyyy');
-     this.analysisData[this.currentIndex].analysis.sampling_date = dataFixed;
-    }
-  }
+ 
 
   @HostListener('window:resize')
   onResize() {

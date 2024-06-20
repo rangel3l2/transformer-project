@@ -31,6 +31,7 @@ def get_analisys_data_database():
     database_uri = app.config['SQLALCHEMY_DATABASE_URI']
     database_adapter = DatabaseAdapter(database_uri)
     analisys_repository = AnalisysRepository(database_adapter=database_adapter)
+    
     return analisys_repository.get_analisys()
 
 def get_analisys_from_equipmentAndParameter_database():
@@ -171,4 +172,4 @@ def update_chemicals_analized_data(data):
     database_adapter = DatabaseAdapter(database_uri)
     status=ChemicalsAnalizedRepository(database_adapter=database_adapter).update_chemicals_analized(data)
     return status
-    
+

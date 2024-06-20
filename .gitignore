@@ -2,3 +2,5 @@ node_modules/
 venv/
 mysql_data/
 #.env/
+credential.json/
+credentials.old.json/
